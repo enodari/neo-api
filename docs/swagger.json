@@ -1,0 +1,128 @@
+{
+    "swagger": "3.0",
+    "info":
+    {
+        "description": "Simple readonly REST API for near-Earth objects (NEO)",
+        "title": "NEO API",
+        "contact":
+        {
+            "email": "info@nodari.me"
+        },
+        "license":
+        {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "neos.nodari.io",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "NEO",
+            "description": "A near-Earth object (NEO) is any small Solar System body whose orbit can bring it into proximity with Earth",
+    }],
+    "paths":
+    {
+        "/":
+        {
+            "get":
+            {
+                "tags": ["NEO"],
+                "summary": "Get all NEOs",
+                "description": "Complete list of all numbered and unnumbered objects",
+                "operationId": "all-neos",
+                "produces": ["application/json"],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "successful operation",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/neo"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{name}":
+        {
+            "get":
+            {
+                "tags": ["NEO"],
+                "summary": "Get NEO by name",
+                "description": "Returns a single NEO",
+                "operationId": "neo-by-name",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of NEO to return",
+                        "required": true,
+                        "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "successful operation",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/neo"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "NEO not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "neo":
+        {
+            "type": "object",
+            "required": ["name"],
+            "properties":
+            {
+                "name":
+                {
+                    "type": "string",
+                    "example": "Eros"
+                },
+                "number":
+                {
+                    "type": "string",
+                    "example": "433"
+                },
+                "absolute_magnitude":
+                {
+                    "type": "number",
+                    "example": "10.8"
+                },
+                "slope_parameter":
+                {
+                    "type": "number",
+                    "example": "0.46"
+                },
+                "perihelion":
+                {
+                    "type": "number",
+                    "example": "1.1332"
+                },
+                "aphelion":
+                {
+                    "type": "number",
+                    "example": "1.7824"
+                },
+            }
+        }
+    }
+}
