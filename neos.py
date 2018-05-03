@@ -42,5 +42,5 @@ class NeoResource:
 
 
 api = falcon.API()
-api.add_route('/', NeoResource())  # all objects
-api.add_route('/{name}', NeoResource())  # single object by 'name'
+api.add_route('/api/', NeoResource())  # all objects
+api.add_route('/api/{name}', NeoResource())  # single object by 'name'
