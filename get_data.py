@@ -1,4 +1,4 @@
-from models import db, Neo
+from neos import Neo
 import requests
 import random
 
@@ -32,9 +32,9 @@ def get_from_neodys():
 
 
 if __name__ == "__main__":
-    db.connect()
+    Neo._meta.database.connect()
 
     if not Neo.table_exists():
-        db.create_tables([Neo])
+        Neo._meta.database.create_tables([Neo])
 
     get_from_neodys()
